@@ -1,0 +1,71 @@
+
+int letterHeight = 20; 
+int letterWidth = 20;         
+
+int x = 20;          
+int y = 40;                  
+int hue;
+boolean newletter;  
+boolean backspace;
+boolean period;
+float theta;
+int letter = char(key);
+
+void setup() {
+  colorMode(HSB,26);
+  size(640, 640);
+  noStroke();
+  background(26,0,26);
+  textSize(32);
+}
+
+
+void draw() {
+  if (newletter == true) {
+    int y_pos;
+    hue=char(key)-96;
+    fill(hue,26,26);
+    y_pos = y;
+    textAlign(CENTER);
+    rotate(theta);
+    
+    text(abc.charAt(key-97), x, y_pos);
+    theta+=.111;
+  }
+  newletter=false;
+  if (backspace==true)
+  {
+    fill(hue,26,26);
+    rect(x, y-letterHeight, letterWidth, letterHeight);
+    theta=0;
+  }
+  backspace=false;
+}
+
+String abc="abcdefghijklmnopqrstuvwxyz";
+
+void keyPressed()
+{
+  if ((key >= 'A' && key <= 'Z') || (key >= 'a' && key <= 'z')) {
+    newletter = true;
+  hue=0;
+    letterHeight = 20;
+    x = ( x + letterWidth ); 
+    if (x > width) {
+      x = 5;
+      y+= 40;
+    }
+
+    if ( y > height - letterHeight) {
+      y = 20;
+    }
+  }
+
+  if (key==8) {
+    backspace=true;
+    x = ( x - letterWidth ); 
+
+   
+  }
+ 
+}
